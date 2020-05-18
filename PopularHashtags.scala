@@ -65,7 +65,7 @@ object PopularHashtags {
     val hashtagKeyValues = hashtags.map(hashtag => (hashtag, 1))
     
     // Counting the popular #value over a 5 minute window sliding every one second
-    val hashtagCounts = hashtagKeyValues.reduceByKeyAndWindow( (x,y) => x + y, (x,y) => x - y, Seconds(60), Seconds(1))
+    val hashtagCounts = hashtagKeyValues.reduceByKeyAndWindow( (x,y) => x + y, (x,y) => x - y, Seconds(600), Seconds(1))
    
     // Sorting the results by the count values
     val sortedResults = hashtagCounts.transform(rdd => rdd.sortBy(x => x._2, false))
